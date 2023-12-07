@@ -1,5 +1,4 @@
 async function getAllProducts() { }
-
 module.exports = {
-  getAllProducts,
+  cartItem,order,product,productReview,user
 };
