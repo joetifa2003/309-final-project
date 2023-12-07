@@ -1,5 +1,4 @@
 import HeroImg from "../assets/hero.png";
-import Button from "../components/Button";
 
 function IndexPage() {
   return (
@@ -23,7 +22,7 @@ function Hero() {
           <p className="mt-8 text-2xl font-semibold leading-none">
             For minimalist & modern with affordable price.
           </p>
-          <Button className="mt-8 lg:mt-16">Featured Products</Button>
+          <button className="btn mt-8 lg:mt-16">Featured Products</button>
         </div>
       </div>
     </section>
