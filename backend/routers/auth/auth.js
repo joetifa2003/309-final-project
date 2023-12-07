@@ -12,7 +12,7 @@ const authenticated = async (req, res, next) => {
 
   try {
     const payload = jwt.verify(token, JWT_SECERT);
-    req.auth = payload;
+    req.user = payload;
     next();
   } catch (error) {
     res.status(401).json({
@@ -31,7 +31,7 @@ const authenticatedAdmin = async (req, res, next) => {
     if (!user.isAdmin) {
       throw new Error("not admin");
     }
-    req.auth = payload;
+    req.user = payload;
     next();
   } catch (error) {
     res.status(401).json({
