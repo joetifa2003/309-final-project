@@ -13,3 +13,15 @@ section {
 .container {
   width: calc(100% - 1rem);
 }
+
+.btn {
+  @apply w-full border-4 border-accent p-4 text-2xl font-medium leading-none transition-all duration-200 hover:bg-accent hover:text-white lg:w-auto;
+}
+
+body {
+  @apply bg-[#f0eded];
+}
+
+.input-txt {
+  @apply p-4;
+}
