@@ -11,7 +11,7 @@ const authenticated = async (req, res, next) => {
   const { token } = req.body;
 
   try {
-    const payload = jwt.verify(token, jwt_secert);
+    const payload = jwt.verify(token, JWT_SECERT);
     req.auth = payload;
     next();
   } catch (error) {
@@ -25,7 +25,7 @@ const authenticatedAdmin = async (req, res, next) => {
   const { token } = req.body;
 
   try {
-    const payload = jwt.verify(token, jwt_secert);
+    const payload = jwt.verify(token, JWT_SECERT);
     const userId = payload.id;
     const user = await getUserById(userId);
     if (!user.isAdmin) {
