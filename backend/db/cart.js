@@ -5,3 +5,6 @@ const CartItem=require("./schema/cartItem");
          productID
      })
  }
+module.exports = {
+  addToCart,
+};
