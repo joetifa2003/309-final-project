@@ -14,7 +14,13 @@ async function removeFromCart(userID, productID) {
   });
 }
 
+async function getCartItems(userID) {
+  const cartItems = await CartItem.find({userID});
+  return cartItems;
+}
+
 module.exports = {
   addToCart,
   removeFromCart,
+  getCartItems,
 };
