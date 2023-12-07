@@ -1,4 +1,4 @@
-function getAllProducts() { }
+async function getAllProducts() { }
 
 module.exports = {
   getAllProducts,
