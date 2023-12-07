@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const products = require("./routers/products/products");
-const { auth } = require("./routers/auth/auth");
+const { router: auth } = require("./routers/auth/auth");
 
 const app = express();
 const port = 2000;
