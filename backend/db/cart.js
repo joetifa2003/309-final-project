@@ -8,7 +8,7 @@ async function addToCart(userID, productID) {
 }
 
 async function removeFromCart(userID, productID) {
-  await CartItem.remove({
+  await CartItem.findOneAndRemove({
     userID,
     productID,
   });
@@ -16,4 +16,5 @@ async function removeFromCart(userID, productID) {
 
 module.exports = {
   addToCart,
+  removeFromCart,
 };
