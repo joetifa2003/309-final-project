@@ -5,11 +5,12 @@ import CartIcon from "../assets/cart.svg";
 import { UserContext } from "../context/user";
 
 function NavBar() {
-  const { user, setToken } = useContext(UserContext);
+  const { user, setToken, setUser } = useContext(UserContext);
 
   const logOut = useCallback(() => {
     localStorage.removeItem("token");
     setToken(null);
+    setUser(null);
   }, []);
 
   return (
@@ -20,16 +21,22 @@ function NavBar() {
             Furniture
           </Link>
         </div>
-        <div className="flex space-x-6">
+        <div className="flex items-center space-x-6">
           <img className="h-8 w-8 cursor-pointer" src={CartIcon} />
           <img className="h-8 w-8 cursor-pointer" src={AvatarIcon} />
           {!user ? (
             <>
-              <Link to={"/signup"}>Sign up</Link>
-              <Link to={"/login"}>Login</Link>
+              <Link to={"/signup"} className="btn btn-small">
+                Sign up
+              </Link>
+              <Link to={"/login"} className="btn btn-small">
+                Login
+              </Link>
             </>
           ) : (
-            <button onClick={logOut}>Log out</button>
+            <button onClick={logOut} className="btn btn-small">
+              Log out
+            </button>
           )}
         </div>
       </div>
