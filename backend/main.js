@@ -2,7 +2,7 @@ const express = require("express");
 const products = require("./products/products");
 const mongoose = require("mongoose");
 const app = express();
-const port = 8080;
+const port = 2000;
 
 app.use(express.json());
 
