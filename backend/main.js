@@ -1,5 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
+
 const products = require("./routers/products/products");
 const cart = require("./routers/cart/cart");
 const { router: auth } = require("./routers/auth/auth");
@@ -8,6 +10,7 @@ const app = express();
 const port = 2000;
 
 app.use(express.json());
+app.use(cors());
 
 mongoose.set("strictQuery", false);
 mongoose
