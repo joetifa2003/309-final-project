@@ -1,7 +1,6 @@
 const express = require("express");
 const products = require("./products/products");
 const mongoose = require("mongoose");
-const {getAllProducts}=require("./db/products")
 const app = express();
 const port = 8080;
 
@@ -16,7 +15,7 @@ mongoose
   .catch((err) => {
     console.error("MongoDB connection error:", err);
   });
-getAllProducts().then((p) => console.log(p));
+
 app.use("/products", products);
 
 app.listen(port);
