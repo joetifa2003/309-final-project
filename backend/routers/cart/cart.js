@@ -7,17 +7,24 @@ router.post("/add", authenticated, async (req, res) => {
     const userID = req.user.id;
     const { productID } = req.body;
     await addToCart(userID, productID);
+    res.json({
+        message: "added to cart",
+    });
 });
 
 router.delete("/remove", authenticated, async (req, res) => {
     const userID = req.user.id;
     const { productID } = req.body;
     await removeFromCart(userID, productID);
+    res.json({
+        message: "removed to cart",
+    });
 });
 
-router.get("/getItems", authenticated, async (req, res) => {
-  const userID = req.user.id;
-  const cartItems = await getCartItems(userID);
+router.get("/products", authenticated, async (req, res) => {
+    const userID = req.user.id;
+    const products = await getCartItems(userID);
+    res.json(products);
 });
 
 module.exports = router;
