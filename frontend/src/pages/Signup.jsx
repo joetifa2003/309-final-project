@@ -1,8 +1,11 @@
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
+import { UserContext } from "../context/user";
 import api from "../lib/axios";
 
 function SignUp() {
-  const onSubmit = useCallback((event) => {
+  const { setToken } = useContext(UserContext);
+
+  const onSubmit = useCallback(async (event) => {
     event.preventDefault();
 
     const formData = new FormData(event.target);
@@ -18,9 +21,14 @@ function SignUp() {
       alert("Passwords do not match");
     }
 
-    api.post("/auth/signup", data).then((response) => {
-      console.log(response);
-    });
+    try {
+      const res = await api.post("/auth/signup", data);
+      const token = res.data.token;
+      localStorage.setItem("token", token);
+      setToken(token);
+    } catch (e) {
+      alert("an account already exists with that email");
+    }
   }, []);
 
   return (

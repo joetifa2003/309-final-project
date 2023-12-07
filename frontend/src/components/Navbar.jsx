@@ -1,8 +1,16 @@
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AvatarIcon from "../assets/avatar.svg";
 import CartIcon from "../assets/cart.svg";
+import { UserContext } from "../context/user";
 
 function NavBar() {
+  const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
   return (
     <nav className="fixed top-0 z-20 w-full bg-white py-4">
       <div className="container flex space-x-8">

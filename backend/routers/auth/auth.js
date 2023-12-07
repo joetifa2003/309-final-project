@@ -7,8 +7,10 @@ const router = express.Router();
 
 const JWT_SECERT = "asdaskldjaskldjasdasdkljalskdjaklsdjalksdj";
 
+const getTokenFromHeaders = (req) => req.headers["authorization"].split(" ")[1];
+
 const authenticated = async (req, res, next) => {
-  const { token } = req.body;
+  const token = getTokenFromHeaders(req);
 
   try {
     const payload = jwt.verify(token, JWT_SECERT);
@@ -22,7 +24,7 @@ const authenticated = async (req, res, next) => {
 };
 
 const authenticatedAdmin = async (req, res, next) => {
-  const { token } = req.body;
+  const token = getTokenFromHeaders(req);
 
   try {
     const payload = jwt.verify(token, JWT_SECERT);
@@ -40,8 +42,13 @@ const authenticatedAdmin = async (req, res, next) => {
   }
 };
 
+const createUserToken = (user) =>
+  jwt.sign({ email: user.email, id: user.id }, JWT_SECERT, {
+    expiresIn: "10h",
+  });
+
 router.get("/me", authenticated, async (req, res) => {
-  res.json(req.auth);
+  res.json(req.user);
 });
 
 router.post("/signup", async (req, res) => {
@@ -53,13 +60,22 @@ router.post("/signup", async (req, res) => {
     return;
   }
 
+  const userExists = await getUserByEmail(email);
+  if (userExists) {
+    res.status(400).json({
+      message: "user already exists",
+    });
+    return;
+  }
+
   const salt = await bcrypt.genSalt();
   const passwordHash = await bcrypt.hash(password, salt);
 
-  await createUser(email, name, passwordHash);
+  const user = await createUser(email, name, passwordHash);
+  const token = createUserToken(user);
 
   res.json({
-    message: "user created",
+    token,
   });
 });
 
@@ -88,9 +104,7 @@ router.post("/login", async (req, res) => {
     return;
   }
 
-  const token = jwt.sign({ email: user.email, id: user.id }, JWT_SECERT, {
-    expiresIn: "10h",
-  });
+  const token = createUserToken(user);
 
   res.json({
     token,
