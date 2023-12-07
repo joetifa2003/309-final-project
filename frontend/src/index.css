@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  @apply text-dark-gray;
+}
+
+section {
+  @apply pt-[72px];
+}
+
+.container {
+  width: calc(100% - 1rem);
+}
