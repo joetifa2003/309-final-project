@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const products = require("./routers/products/products");
+const cart=require("./routers/cart/cart);
 const { router: auth } = require("./routers/auth/auth");
 
 const app = express();
@@ -21,5 +22,5 @@ mongoose
 
 app.use("/products", products);
 app.use("/auth", auth);
-
+app.use("/cart",cart);
 app.listen(port);
