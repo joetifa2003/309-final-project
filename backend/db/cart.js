@@ -7,6 +7,13 @@ async function addToCart(userID, productID) {
   });
 }
 
+async function removeFromCart(userID, productID) {
+  await CartItem.remove({
+    userID,
+    productID,
+  });
+}
+
 module.exports = {
   addToCart,
 };
