@@ -1,6 +1,5 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const products = require("./products/products");
 const app = express();
 const port = 3000;
 app.use(express.json());
