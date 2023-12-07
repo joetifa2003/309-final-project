@@ -1,18 +1,20 @@
-import CartIcon from "../assets/cart.svg";
+import { Link } from "react-router-dom";
 import AvatarIcon from "../assets/avatar.svg";
+import CartIcon from "../assets/cart.svg";
 
 function NavBar() {
   return (
-    <nav className="fixed top-0 z-20 w-full py-4 bg-white">
+    <nav className="fixed top-0 z-20 w-full bg-white py-4">
       <div className="container flex space-x-8">
         <div className="flex flex-1 justify-between">
-          <div className="font-brand text-4xl leading-10 font-black">
+          <Link to={"/"} className="font-brand text-4xl font-black leading-10">
             Furniture
-          </div>
+          </Link>
         </div>
         <div className="flex space-x-6">
-          <img className="cursor-pointer w-8 h-8" src={CartIcon} />
-          <img className="cursor-pointer w-8 h-8" src={AvatarIcon} />
+          <img className="h-8 w-8 cursor-pointer" src={CartIcon} />
+          <img className="h-8 w-8 cursor-pointer" src={AvatarIcon} />
+          <Link to={"/signup"}>Sign up</Link>
         </div>
       </div>
     </nav>
