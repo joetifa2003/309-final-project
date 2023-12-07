@@ -4,7 +4,7 @@ const { getAllProducts } = require("../../db/products");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-    let products = await getAllProducts();
+    const products = await getAllProducts();
     res.json(products);
 });
 
