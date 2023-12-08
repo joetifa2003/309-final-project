@@ -17,22 +17,37 @@ export const ProductCard = ({
 
   const addToCart = useAddToCart(p["_id"]);
 
-  const removeFromCart = useCallback(async () => {
-    if (!user) return;
+  const removeFromCart = useCallback(
+    async (e) => {
+      e?.stopPropagation();
 
-    await api.post("/cart/remove", {
-      productID: p["_id"],
-    });
+      if (!user) return;
 
-    await Swal.fire({
-      title: "Product removed from cart!",
-      icon: "success",
-    });
+      await api.post("/cart/remove", {
+        productID: p["_id"],
+      });
 
-    if (onRemoveFromCart) {
-      onRemoveFromCart();
-    }
-  }, [user]);
+      const res = await Swal.fire({
+        title: "Are you sure you want to remove product from cart?",
+        showConfirmButton: true,
+        showCancelButton: true,
+      });
+
+      if (res.isDenied || res.isDismissed) {
+        return;
+      }
+
+      await Swal.fire({
+        title: "Product removed from cart!",
+        icon: "success",
+      });
+
+      if (onRemoveFromCart) {
+        onRemoveFromCart();
+      }
+    },
+    [user],
+  );
 
   return (
     <div

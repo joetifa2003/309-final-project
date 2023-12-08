@@ -11,7 +11,7 @@ export const AdminPanel = () => {
     <section className="container flex flex-col space-y-16">
       <h1 className="text-center">Admin Panel</h1>
 
-      <div className="flex justify-between">
+      <div className="flex flex-col justify-between md:flex-row">
         <h1>Products</h1>
         <Link to={"/admin/create"} className="btn">
           Create Product
