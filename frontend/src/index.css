@@ -7,7 +7,7 @@
 }
 
 section {
-  @apply pt-[72px];
+  @apply pt-[80px];
 }
 
 .container {
@@ -28,4 +28,8 @@ body {
 
 .input-txt {
   @apply p-4;
+}
+
+h1 {
+  @apply text-5xl font-bold;
 }

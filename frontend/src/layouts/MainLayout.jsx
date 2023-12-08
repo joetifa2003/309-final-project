@@ -6,6 +6,7 @@ import api from "../lib/axios";
 
 function MainLayout() {
   const [user, setUser] = useState(null);
+  const [userLoaded, setUserLoaded] = useState(false);
   const [token, setToken] = useState(null);
 
   useEffect(() => {
@@ -14,13 +15,16 @@ function MainLayout() {
       api.defaults.headers["Authorization"] = `Bearer ${t}`;
       api.get("/auth/me").then((res) => {
         setUser(res.data);
+        setUserLoaded(true);
       });
     }
   }, [token]);
 
   return (
     <>
-      <UserContext.Provider value={{ user, setUser, token, setToken }}>
+      <UserContext.Provider
+        value={{ user, setUser, token, setToken, userLoaded }}
+      >
         <NavBar />
         <Outlet />
       </UserContext.Provider>

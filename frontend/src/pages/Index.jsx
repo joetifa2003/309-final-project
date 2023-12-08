@@ -1,9 +1,12 @@
 import HeroImg from "../assets/hero.png";
+import { Loading } from "../components/Loading";
+import { useFetcher } from "../hooks/fetcher";
 
 function IndexPage() {
   return (
     <div>
       <Hero />
+      <Products />
     </div>
   );
 }
@@ -25,6 +28,25 @@ function Hero() {
           <button className="btn mt-8 lg:mt-16">Featured Products</button>
         </div>
       </div>
+    </section>
+  );
+}
+
+function Products() {
+  const { data: products, loading } = useFetcher("/products");
+
+  return (
+    <section className="container">
+      <h1>Products</h1>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div>
+          {products.map((product) => (
+            <div key={product.id}>{product.name}</div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }
