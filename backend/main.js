@@ -9,6 +9,8 @@ const { router: upload } = require("./routers/upload/upload");
 const app = express();
 const port = 2000;
 
+process.on("uncaughtException", (err) => console.log(err));
+
 app.use(express.json());
 app.use(cors());
 

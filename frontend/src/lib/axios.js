@@ -3,7 +3,7 @@ import { getApiUrl } from "./getApiUrl";
 
 const api = axios.create({
   baseURL: getApiUrl(),
-  timeout: 1000,
+  timeout: 15000,
   headers: {},
 });
 

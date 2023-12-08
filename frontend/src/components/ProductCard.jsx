@@ -50,29 +50,32 @@ export const ProductCard = ({
     [user],
   );
 
-  const removeProduct = useCallback(async (e) => {
-    e?.stopPropagation();
-    if (!user) return;
+  const removeProduct = useCallback(
+    async (e) => {
+      e?.stopPropagation();
+      if (!user) return;
 
-    const res = await Swal.fire({
-      title: "Are you sure you want to remove product?",
-      showConfirmButton: true,
-      showCancelButton: true,
-    });
+      const res = await Swal.fire({
+        title: "Are you sure you want to remove product?",
+        showConfirmButton: true,
+        showCancelButton: true,
+      });
 
-    if (res.isDenied || res.isDismissed) {
-      return;
-    }
+      if (res.isDenied || res.isDismissed) {
+        return;
+      }
 
-    await api.delete(`/products/${p["_id"]}`);
+      await api.delete(`/products/${p["_id"]}`);
 
-    await Swal.fire({
-      title: "Product removed!",
-      icon: "success",
-    });
+      await Swal.fire({
+        title: "Product removed!",
+        icon: "success",
+      });
 
-    onRemove();
-  }, []);
+      onRemove();
+    },
+    [user],
+  );
 
   return (
     <div

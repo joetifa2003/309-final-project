@@ -16,7 +16,9 @@ export const Product = () => {
       ) : (
         <>
           <div className="flex flex-col gap-8 lg:flex-row">
-            <ProductCard p={product} />
+            <div>
+              <ProductCard p={product} />
+            </div>
             <p className="whitespace-pre-wrap">{product.desc}</p>
           </div>
           <button className="btn mt-8 bg-white" onClick={addToCart}>
