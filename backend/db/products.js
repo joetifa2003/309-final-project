@@ -1,3 +1,4 @@
+const { removeProductFromCarts } = require("./cart");
 const Product = require("./schema/product");
 
 async function getAllProducts() {
@@ -18,6 +19,7 @@ async function createProduct(name, price, img, desc) {
 }
 
 async function deleteProduct(productId) {
+  await removeProductFromCarts(productId);
   const deletedProduct = await Product.findByIdAndDelete(productId);
   return deletedProduct;
 }
