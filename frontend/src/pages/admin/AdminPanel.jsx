@@ -8,15 +8,11 @@ export const AdminPanel = () => {
   const { data: products, loading, refetch } = useFetcher("/products");
 
   return (
-    <section className="container flex flex-col space-y-16">
-      <h1 className="text-center">Admin Panel</h1>
-
-      <div className="flex flex-col justify-between md:flex-row">
-        <h1>Products</h1>
-        <Link to={"/admin/create"} className="btn">
-          Create Product
-        </Link>
-      </div>
+    <section className="container flex flex-col space-y-8">
+      <h1>Products</h1>
+      <Link to={"/admin/create"} className="btn">
+        <span>Create product</span>
+      </Link>
 
       <div>
         {loading ? (
