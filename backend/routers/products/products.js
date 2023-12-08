@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllProducts, createProduct,deleteProduct } = require("../../db/products");
+const { getAllProducts, createProduct,deleteProduct, getProductById } = require("../../db/products");
 const { authenticatedAdmin } = require("../auth/auth");
 const { uploadHandler } = require("../upload/upload");
 
@@ -10,7 +10,14 @@ router.get("/", async (req, res) => {
   res.json(products);
 });
 
-router.get("/:id", async (req, res) => {});
+router.get("/:id", async (req, res) => {
+
+  const productId =req.params.id;
+  const product = await getProductById(productId);
+  res.json(product);
+
+
+});
 
 router.post(
   "/create",

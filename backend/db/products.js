@@ -15,9 +15,16 @@ async function createProduct(name, price, img) {
     imgUrl: img,
   });
 }
+async function deleteProduct(productId) {
+  const deletedProduct = await Product.findByIdAndDelete(productId);
+  return deletedProduct;
+}
+
+
 
 module.exports = {
   getAllProducts,
   getProductById,
   createProduct,
+  deleteProduct,
 };
