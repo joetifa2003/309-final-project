@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { Loading } from "../../components/Loading";
+import { ProductCard } from "../../components/ProductCard";
+import { ProductsContainer } from "../../components/ProductsContainer";
 import { useFetcher } from "../../hooks/fetcher";
 
 export const AdminPanel = () => {
@@ -20,11 +22,11 @@ export const AdminPanel = () => {
         {loading ? (
           <Loading />
         ) : (
-          <div>
+          <ProductsContainer>
             {products.map((product) => (
-              <div key={product.id}>{product.name}</div>
+              <ProductCard key={product.id} p={product} />
             ))}
-          </div>
+          </ProductsContainer>
         )}
       </div>
     </section>

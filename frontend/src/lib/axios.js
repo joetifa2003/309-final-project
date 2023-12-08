@@ -1,7 +1,8 @@
 import axios from "axios";
+import { getApiUrl } from "./getApiUrl";
 
 const api = axios.create({
-  baseURL: process.env.NODE_ENV === "production" ? "" : "http://localhost:2000",
+  baseURL: getApiUrl(),
   timeout: 1000,
   headers: {},
 });

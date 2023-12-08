@@ -1,5 +1,7 @@
 import HeroImg from "../assets/hero.png";
 import { Loading } from "../components/Loading";
+import { ProductCard } from "../components/ProductCard";
+import { ProductsContainer } from "../components/ProductsContainer";
 import { useFetcher } from "../hooks/fetcher";
 
 function IndexPage() {
@@ -37,15 +39,15 @@ function Products() {
 
   return (
     <section className="container">
-      <h1>Products</h1>
+      <h1 className="mb-8">Products</h1>
       {loading ? (
         <Loading />
       ) : (
-        <div>
+        <ProductsContainer>
           {products.map((product) => (
-            <div key={product.id}>{product.name}</div>
+            <ProductCard key={product.id} p={product} />
           ))}
-        </div>
+        </ProductsContainer>
       )}
     </section>
   );
