@@ -4,6 +4,7 @@ import MainLayout from "./layouts/MainLayout";
 import { UserLayout } from "./layouts/UserLayout";
 import { AdminPanel } from "./pages/admin/AdminPanel";
 import { AdminProductCreate } from "./pages/admin/AdminProductCreate";
+import { AdminProductEdit } from "./pages/admin/AdminProductEdit";
 import { Cart } from "./pages/Cart";
 import IndexPage from "./pages/Index";
 import Login from "./pages/Login";
@@ -37,6 +38,7 @@ export const router = createBrowserRouter([
             element: <AdminPanel />,
           },
           { path: "/admin/create", element: <AdminProductCreate /> },
+          { path: "/admin/edit/:id", element: <AdminProductEdit /> },
         ],
       },
       {

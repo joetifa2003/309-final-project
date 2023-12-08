@@ -37,9 +37,20 @@ function NavBar() {
               </Link>
             </>
           ) : (
-            <button onClick={logOut} className="btn btn-small">
-              Log out
-            </button>
+            <>
+              <button onClick={logOut} className="btn btn-small">
+                Log out
+              </button>
+              {user.isAdmin && (
+                <Link
+                  to="/admin"
+                  className="btn btn-small bg-white"
+                  onClick={() => setMenuOpend(false)}
+                >
+                  Admin
+                </Link>
+              )}
+            </>
           )}
         </div>
         <span className="md:hidden">
@@ -85,6 +96,15 @@ function NavBar() {
                   <button onClick={logOut} className="btn btn-small bg-white">
                     Log out
                   </button>
+                  {user.isAdmin && (
+                    <Link
+                      to="/admin"
+                      className="btn btn-small bg-white"
+                      onClick={() => setMenuOpend(false)}
+                    >
+                      Admin
+                    </Link>
+                  )}
                 </div>
               )}
             </div>

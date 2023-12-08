@@ -95,9 +95,14 @@ export const ProductCard = ({
             </button>
           )}
           {showAdminControls && (
-            <button className="btn bg-white" onClick={removeProduct}>
-              Remove product
-            </button>
+            <div className="flex flex-col space-y-8">
+              <button className="btn bg-white" onClick={removeProduct}>
+                Edit product
+              </button>
+              <button className="btn bg-white" onClick={removeProduct}>
+                Remove product
+              </button>
+            </div>
           )}
         </div>
       )}
