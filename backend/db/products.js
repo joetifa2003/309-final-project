@@ -18,11 +18,10 @@ async function createProduct(name, price, img, desc) {
   });
 }
 
-async function updateProduct(name, price, img, desc,productId) {
-  return await Product.findByIdAndUpdate( productId,{
+async function updateProduct(productID, name, price, desc) {
+  return await Product.findByIdAndUpdate(productID, {
     name,
     price,
-    imgUrl: img,
     desc,
   });
 }

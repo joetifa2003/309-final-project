@@ -96,7 +96,13 @@ export const ProductCard = ({
           )}
           {showAdminControls && (
             <div className="flex flex-col space-y-8">
-              <button className="btn bg-white" onClick={removeProduct}>
+              <button
+                className="btn bg-white"
+                onClick={(e) => {
+                  e?.stopPropagation();
+                  nav(`/admin/edit/${p["_id"]}`);
+                }}
+              >
                 Edit product
               </button>
               <button className="btn bg-white" onClick={removeProduct}>

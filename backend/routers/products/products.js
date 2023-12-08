@@ -53,21 +53,26 @@ router.delete("/:productId", authenticatedAdmin, async (req, res) => {
 });
 
 // take name and price from body, then update the db
-router.post("/edit", authenticatedAdmin, async (req, res) => {
-  const { name, price, desc ,productId} = req.body;
-  if (!name || !price || !desc) {
-    return res.status(400).json({ message: "Missing required fields" });
-  }
+router.post(
+  "/edit",
+  authenticatedAdmin,
+  uploadHandler.none(),
+  async (req, res) => {
+    const { name, price, desc, productID } = req.body;
+    if (!name || !price || !desc || !productID) {
+      console.log(req.body);
+      return res.status(400).json({ message: "Missing required fields" });
+    }
 
-  const product = await updateProduct(
-    req.body.name,
-    req.body.price,
-    req.file.filename,
-    req.body.desc,
-  );
-  res.json(product);
+    const product = await updateProduct(
+      productID,
+      req.body.name,
+      req.body.price,
+      req.body.desc,
+    );
 
-
-});
+    res.json(product);
+  },
+);
 
 module.exports = router;
