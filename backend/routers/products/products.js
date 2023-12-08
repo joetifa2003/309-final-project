@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllProducts, createProduct } = require("../../db/products");
+const { getAllProducts, createProduct,deleteProduct } = require("../../db/products");
 const { authenticatedAdmin } = require("../auth/auth");
 const { uploadHandler } = require("../upload/upload");
 
@@ -27,7 +27,20 @@ router.post(
 );
 
 // delete product usingProduct id, it will be productID in body
-router.post("/delete", authenticatedAdmin, async (req, res) => {});
+  router.delete(
+    '/delete/:productId',
+    authenticatedAdmin,
+    async (req, res) => {
+        const productId = req.params.productId;
+        const deletedProduct = await deleteProduct(productId);
+        if (!deletedProduct) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+        res.json({ message: 'Product deleted successfully', deletedProduct });
+}
+);
+
+
 
 // take name and price from body, then update the db
 router.post("/edit", authenticatedAdmin, async (req, res) => {});

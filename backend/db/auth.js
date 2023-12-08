@@ -8,6 +8,10 @@ async function createUser(email, name, password, img) {
     imgUrl: img,
   });
 }
+async function deleteProduct(productId) {
+  const deletedProduct = await Product.findByIdAndDelete(productId);
+  return deletedProduct;
+}
 
 async function getUserByEmail(email) {
   return await User.findOne({ email });
@@ -21,4 +25,5 @@ module.exports = {
   createUser,
   getUserByEmail,
   getUserById,
+  deleteProduct,
 };
