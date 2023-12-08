@@ -5,7 +5,7 @@ const cors = require("cors");
 const products = require("./routers/products/products");
 const cart = require("./routers/cart/cart");
 const { router: auth } = require("./routers/auth/auth");
-
+const upload = require("./routers/upload/upload");
 const app = express();
 const port = 2000;
 
@@ -25,4 +25,5 @@ mongoose
 app.use("/products", products);
 app.use("/auth", auth);
 app.use("/cart", cart);
+app.use("/upload", upload);
 app.listen(port);
