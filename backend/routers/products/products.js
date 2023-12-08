@@ -4,6 +4,7 @@ const {
   createProduct,
   deleteProduct,
   getProductById,
+  updateProduct,
 } = require("../../db/products");
 const { authenticatedAdmin } = require("../auth/auth");
 const { uploadHandler } = require("../upload/upload");
@@ -52,6 +53,21 @@ router.delete("/:productId", authenticatedAdmin, async (req, res) => {
 });
 
 // take name and price from body, then update the db
-router.post("/edit", authenticatedAdmin, async (req, res) => {});
+router.post("/edit", authenticatedAdmin, async (req, res) => {
+  const { name, price, desc ,productId} = req.body;
+  if (!name || !price || !desc) {
+    return res.status(400).json({ message: "Missing required fields" });
+  }
+
+  const product = await updateProduct(
+    req.body.name,
+    req.body.price,
+    req.file.filename,
+    req.body.desc,
+  );
+  res.json(product);
+
+
+});
 
 module.exports = router;

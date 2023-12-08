@@ -18,6 +18,15 @@ async function createProduct(name, price, img, desc) {
   });
 }
 
+async function updateProduct(name, price, img, desc,productId) {
+  return await Product.findByIdAndUpdate( productId,{
+    name,
+    price,
+    imgUrl: img,
+    desc,
+  });
+}
+
 async function deleteProduct(productId) {
   await removeProductFromCarts(productId);
   const deletedProduct = await Product.findByIdAndDelete(productId);
@@ -29,4 +38,5 @@ module.exports = {
   getProductById,
   createProduct,
   deleteProduct,
+  updateProduct,
 };
