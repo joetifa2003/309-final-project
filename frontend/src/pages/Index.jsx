@@ -1,3 +1,4 @@
+import { useState } from "react";
 import HeroImg from "../assets/hero.png";
 import { Loading } from "../components/Loading";
 import { ProductCard } from "../components/ProductCard";
@@ -35,11 +36,19 @@ function Hero() {
 }
 
 function Products() {
-  const { data: products, loading } = useFetcher("/products");
+  const [query, setQuery] = useState("");
+  const { data: products, loading } = useFetcher(`/products`, `q=${query}`);
 
   return (
-    <section className="container">
+    <section className="container min-h-screen">
       <h1 className="mb-8">Products</h1>
+      <input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        className="input-txt mb-8"
+        placeholder="Search products..."
+      />
       {loading ? (
         <Loading />
       ) : (

@@ -26,6 +26,10 @@ async function updateProduct(productID, name, price, desc) {
   });
 }
 
+async function searchProducts(query) {
+  return await Product.find({ name: { $regex: query, $options: "i" } });
+}
+
 async function deleteProduct(productId) {
   await removeProductFromCarts(productId);
   const deletedProduct = await Product.findByIdAndDelete(productId);
@@ -38,4 +42,5 @@ module.exports = {
   createProduct,
   deleteProduct,
   updateProduct,
+  searchProducts,
 };

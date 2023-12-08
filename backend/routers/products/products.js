@@ -5,6 +5,7 @@ const {
   deleteProduct,
   getProductById,
   updateProduct,
+  searchProducts,
 } = require("../../db/products");
 const { authenticatedAdmin } = require("../auth/auth");
 const { uploadHandler } = require("../upload/upload");
@@ -12,7 +13,13 @@ const { uploadHandler } = require("../upload/upload");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const products = await getAllProducts();
+  let products;
+  if (req.query.q) {
+    products = await searchProducts(req.query.q);
+  } else {
+    products = await getAllProducts();
+  }
+
   res.json(products);
 });
 
