@@ -42,7 +42,7 @@ router.post(
 );
 
 // delete product usingProduct id, it will be productID in body
-router.delete("/delete/:productId", authenticatedAdmin, async (req, res) => {
+router.delete("/:productId", authenticatedAdmin, async (req, res) => {
   const productId = req.params.productId;
   const deletedProduct = await deleteProduct(productId);
   if (!deletedProduct) {

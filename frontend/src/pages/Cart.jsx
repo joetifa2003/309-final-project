@@ -21,7 +21,7 @@ export const Cart = () => {
                 p={p}
                 showAddToCart={false}
                 showRemoveFromCart={true}
-                onRemoveFromCart={refetch}
+                onRemove={refetch}
               />
             ))}
           </ProductsContainer>

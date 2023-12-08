@@ -5,7 +5,7 @@ import { ProductsContainer } from "../../components/ProductsContainer";
 import { useFetcher } from "../../hooks/fetcher";
 
 export const AdminPanel = () => {
-  const { data: products, loading } = useFetcher("/products");
+  const { data: products, loading, refetch } = useFetcher("/products");
 
   return (
     <section className="container flex flex-col space-y-16">
@@ -28,6 +28,8 @@ export const AdminPanel = () => {
                 key={product["_id"]}
                 p={product}
                 showAddToCart={false}
+                showAdminControls={true}
+                onRemove={refetch}
               />
             ))}
           </ProductsContainer>

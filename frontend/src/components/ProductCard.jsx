@@ -10,7 +10,8 @@ export const ProductCard = ({
   p,
   showAddToCart = true,
   showRemoveFromCart = false,
-  onRemoveFromCart = null,
+  onRemove = null,
+  showAdminControls = false,
 }) => {
   const { user } = useContext(UserContext);
   const nav = useNavigate();
@@ -42,12 +43,36 @@ export const ProductCard = ({
         icon: "success",
       });
 
-      if (onRemoveFromCart) {
-        onRemoveFromCart();
+      if (onRemove) {
+        onRemove();
       }
     },
     [user],
   );
+
+  const removeProduct = useCallback(async (e) => {
+    e?.stopPropagation();
+    if (!user) return;
+
+    const res = await Swal.fire({
+      title: "Are you sure you want to remove product?",
+      showConfirmButton: true,
+      showCancelButton: true,
+    });
+
+    if (res.isDenied || res.isDismissed) {
+      return;
+    }
+
+    await api.delete(`/products/${p["_id"]}`);
+
+    await Swal.fire({
+      title: "Product removed!",
+      icon: "success",
+    });
+
+    onRemove();
+  }, []);
 
   return (
     <div
@@ -64,6 +89,11 @@ export const ProductCard = ({
           {showRemoveFromCart && (
             <button className="btn bg-white" onClick={removeFromCart}>
               Remove from cart
+            </button>
+          )}
+          {showAdminControls && (
+            <button className="btn bg-white" onClick={removeProduct}>
+              Remove product
             </button>
           )}
         </div>
