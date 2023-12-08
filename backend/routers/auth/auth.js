@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { createUser, getUserByEmail, getUserById } = require("../../db/auth");
+const { uploadHandler } = require("../upload/upload");
 
 const router = express.Router();
 
@@ -55,33 +56,37 @@ router.get("/me", authenticated, async (req, res) => {
   res.json(req.user);
 });
 
-router.post("/signup", async (req, res) => {
-  const { email, name, password } = req.body;
-  if (!email || !name || !password) {
-    res.status(400).json({
-      message: "invalid input",
+router.post(
+  "/signup",
+  uploadHandler.single("profileImage"),
+  async (req, res) => {
+    const { email, name, password } = req.body;
+    if (!email || !name || !password || !req.file) {
+      res.status(400).json({
+        message: "invalid input",
+      });
+      return;
+    }
+
+    const userExists = await getUserByEmail(email);
+    if (userExists) {
+      res.status(400).json({
+        message: "user already exists",
+      });
+      return;
+    }
+
+    const salt = await bcrypt.genSalt();
+    const passwordHash = await bcrypt.hash(password, salt);
+
+    const user = await createUser(email, name, passwordHash, req.file.filename);
+    const token = createUserToken(user);
+
+    res.json({
+      token,
     });
-    return;
-  }
-
-  const userExists = await getUserByEmail(email);
-  if (userExists) {
-    res.status(400).json({
-      message: "user already exists",
-    });
-    return;
-  }
-
-  const salt = await bcrypt.genSalt();
-  const passwordHash = await bcrypt.hash(password, salt);
-
-  const user = await createUser(email, name, passwordHash);
-  const token = createUserToken(user);
-
-  res.json({
-    token,
-  });
-});
+  },
+);
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;

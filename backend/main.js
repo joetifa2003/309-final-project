@@ -5,7 +5,7 @@ const cors = require("cors");
 const products = require("./routers/products/products");
 const cart = require("./routers/cart/cart");
 const { router: auth } = require("./routers/auth/auth");
-const upload = require("./routers/upload/upload");
+const { router: upload } = require("./routers/upload/upload");
 const app = express();
 const port = 2000;
 

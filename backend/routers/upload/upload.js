@@ -15,15 +15,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.post("/", upload.single("file"), (req, res) => {
-  res.json({
-    filename: req.file.filename,
-  });
-});
-
 router.get("/:filename", (req, res) => {
   const p = path.join(__dirname, "../../uploads/");
   res.sendFile(p + req.params.filename);
 });
 
-module.exports = router;
+module.exports = { router, uploadHandler: upload };
