@@ -8,11 +8,11 @@ async function getProductById(id) {
   return await Product.findById(id);
 }
 
-async function createProduct(name, price, img) {
+async function createProduct(name, price, img,desc) {
   return await Product.create({
     name,
     price,
-    imgUrl: img,
+    imgUrl: img, desc
   });
 }
 async function deleteProduct(productId) {

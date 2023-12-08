@@ -28,6 +28,7 @@ router.post(
       req.body.name,
       req.body.price,
       req.file.filename,
+      req.body.desc,
     );
     res.json(product);
   },
