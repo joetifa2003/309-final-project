@@ -24,7 +24,7 @@ export const AdminPanel = () => {
         ) : (
           <ProductsContainer>
             {products.map((product) => (
-              <ProductCard key={product.id} p={product} />
+              <ProductCard key={product["_id"]} p={product} />
             ))}
           </ProductsContainer>
         )}

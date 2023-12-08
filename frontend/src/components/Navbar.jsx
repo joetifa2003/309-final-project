@@ -22,7 +22,9 @@ function NavBar() {
           </Link>
         </div>
         <div className="flex items-center space-x-6">
-          <img className="h-8 w-8 cursor-pointer" src={CartIcon} />
+          <Link to="/user/cart">
+            <img className="h-8 w-8 cursor-pointer" src={CartIcon} />
+          </Link>
           <img className="h-8 w-8 cursor-pointer" src={AvatarIcon} />
           {!user ? (
             <>

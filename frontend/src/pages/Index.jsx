@@ -45,7 +45,7 @@ function Products() {
       ) : (
         <ProductsContainer>
           {products.map((product) => (
-            <ProductCard key={product.id} p={product} />
+            <ProductCard key={product["_id"]} p={product} />
           ))}
         </ProductsContainer>
       )}

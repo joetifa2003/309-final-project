@@ -8,7 +8,19 @@ const router = express.Router();
 
 const JWT_SECERT = "asdaskldjaskldjasdasdkljalskdjaklsdjalksdj";
 
-const getTokenFromHeaders = (req) => req.headers["authorization"].split(" ")[1];
+const getTokenFromHeaders = (req) => {
+  const header = req.headers["authorization"];
+  if (!header) {
+    return null;
+  }
+
+  const parts = header.split(" ");
+  if (parts.length === 2) {
+    return parts[1];
+  }
+
+  return null;
+};
 
 const authenticated = async (req, res, next) => {
   const token = getTokenFromHeaders(req);
