@@ -7,6 +7,7 @@ import { AdminProductCreate } from "./pages/admin/AdminProductCreate";
 import { Cart } from "./pages/Cart";
 import IndexPage from "./pages/Index";
 import Login from "./pages/Login";
+import { Product } from "./pages/Product";
 import SignUp from "./pages/Signup";
 
 export const router = createBrowserRouter([
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/product/:id",
+        element: <Product />,
       },
       {
         path: "/admin",

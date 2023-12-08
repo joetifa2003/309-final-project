@@ -8,7 +8,7 @@ export const AdminPanel = () => {
   const { data: products, loading } = useFetcher("/products");
 
   return (
-    <section className="container space-y-16">
+    <section className="container flex flex-col space-y-16">
       <h1 className="text-center">Admin Panel</h1>
 
       <div className="flex justify-between">
@@ -24,7 +24,11 @@ export const AdminPanel = () => {
         ) : (
           <ProductsContainer>
             {products.map((product) => (
-              <ProductCard key={product["_id"]} p={product} />
+              <ProductCard
+                key={product["_id"]}
+                p={product}
+                showAddToCart={false}
+              />
             ))}
           </ProductsContainer>
         )}

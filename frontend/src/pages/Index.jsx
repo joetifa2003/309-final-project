@@ -15,7 +15,7 @@ function IndexPage() {
 
 function Hero() {
   return (
-    <section className="container flex h-screen flex-col lg:justify-center">
+    <section className="container flex flex-col md:h-screen lg:justify-center">
       <div className="flex h-full flex-col items-center gap-8 lg:flex-row">
         <div className="w-full lg:w-6/12">
           <img src={HeroImg} />

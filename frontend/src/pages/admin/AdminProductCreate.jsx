@@ -24,6 +24,12 @@ export const AdminProductCreate = () => {
           className="input-txt"
           required
         />
+        <textarea
+          name="desc"
+          placeholder="Product description"
+          required
+          className="input-txt"
+        />
         <input
           name="price"
           placeholder="Product price"
