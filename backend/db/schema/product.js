@@ -15,12 +15,14 @@ const productSchema = new Schema({
     type: Number,
     required: true,
   },
-  desc :{
-    type : String,
-    required :true,
-  }
+  desc: {
+    type: String,
+    required: true,
+  },
 });
 
 const Product = mongoose.model("Product", productSchema);
+productSchema.index({ name: "text", "product.name": "text" });
+productSchema.index({ name: "text", "product.desc": "text" });
 
 module.exports = Product;
