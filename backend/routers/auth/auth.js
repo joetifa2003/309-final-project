@@ -43,9 +43,13 @@ const authenticatedAdmin = async (req, res, next) => {
 };
 
 const createUserToken = (user) =>
-  jwt.sign({ email: user.email, id: user.id }, JWT_SECERT, {
-    expiresIn: "10h",
-  });
+  jwt.sign(
+    { email: user.email, id: user.id, isAdmin: user.isAdmin },
+    JWT_SECERT,
+    {
+      expiresIn: "10h",
+    },
+  );
 
 router.get("/me", authenticated, async (req, res) => {
   res.json(req.user);
