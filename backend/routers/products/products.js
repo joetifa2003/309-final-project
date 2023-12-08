@@ -26,6 +26,10 @@ router.post(
   },
 );
 
-router.delete("/delete", authenticatedAdmin, async (req, res) => {});
+// delete product usingProduct id, it will be productID in body
+router.post("/delete", authenticatedAdmin, async (req, res) => {});
+
+// take name and price from body, then update the db
+router.post("/edit", authenticatedAdmin, async (req, res) => {});
 
 module.exports = router;
