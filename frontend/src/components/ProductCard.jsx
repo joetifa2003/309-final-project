@@ -1,6 +1,8 @@
 import { useCallback, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { UserContext } from "../context/user";
+import { useAddToCart } from "../hooks/cart";
 import api from "../lib/axios";
 import { getApiUrl } from "../lib/getApiUrl";
 
@@ -11,19 +13,9 @@ export const ProductCard = ({
   onRemoveFromCart = null,
 }) => {
   const { user } = useContext(UserContext);
+  const nav = useNavigate();
 
-  const addToCart = useCallback(async () => {
-    if (!user) return;
-
-    await api.post("/cart/add", {
-      productID: p["_id"],
-    });
-
-    await Swal.fire({
-      title: "Product added to cart!",
-      icon: "success",
-    });
-  }, [user]);
+  const addToCart = useAddToCart(p["_id"]);
 
   const removeFromCart = useCallback(async () => {
     if (!user) return;
@@ -43,7 +35,10 @@ export const ProductCard = ({
   }, [user]);
 
   return (
-    <div className="group relative flex flex-col space-y-8 border-4 border-accent bg-white p-8">
+    <div
+      className="group relative flex w-full cursor-pointer flex-col space-y-8 border-4 border-accent bg-white p-8"
+      onClick={() => nav(`/product/${p["_id"]}`)}
+    >
       {user && (
         <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50 opacity-0 transition-all duration-200 group-hover:opacity-100">
           {showAddToCart && (
