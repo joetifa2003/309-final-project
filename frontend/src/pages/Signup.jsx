@@ -12,19 +12,13 @@ function SignUp() {
 
     const formData = new FormData(event.target);
 
-    const data = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      password: formData.get("password"),
-      confirmPassword: formData.get("confirmPassword"),
-    };
-
-    if (data.password != data.confirmPassword) {
-      alert("Passwords do not match");
+    if (formData.get("password") != formData.get("confirmPassword")) {
+      alert("passwords do not match");
+      return;
     }
 
     try {
-      const res = await api.post("/auth/signup", data);
+      const res = await api.post("/auth/signup", formData);
       const token = res.data.token;
       localStorage.setItem("token", token);
       setToken(token);
@@ -37,6 +31,7 @@ function SignUp() {
   return (
     <section className="container flex h-screen items-center">
       <form className="flex w-full flex-col space-y-8" onSubmit={onSubmit}>
+        <input name="profileImage" type="file" className="" required />
         <input
           name="name"
           type="text"
@@ -48,18 +43,21 @@ function SignUp() {
           type="email"
           placeholder="Email"
           className="input-txt"
+          required
         />
         <input
           name="password"
           type="password"
           placeholder="Password"
           className="input-txt"
+          required
         />
         <input
           name="confirmPassword"
           type="password"
           placeholder="Confirm Password"
           className="input-txt"
+          required
         />
         <button className="btn">Sign Up</button>
       </form>

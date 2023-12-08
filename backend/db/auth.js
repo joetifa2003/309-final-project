@@ -1,11 +1,11 @@
 const User = require("./schema/user");
 
-async function createUser(email, name, password) {
+async function createUser(email, name, password, img) {
   return await User.create({
     name,
     email,
     password,
-    imgUrl: "asdasd.com/image.jpg", // TODO: handle this after upload is done
+    imgUrl: img,
   });
 }
 
