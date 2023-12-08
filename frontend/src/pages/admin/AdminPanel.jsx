@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { Loading } from "../components/Loading";
-import { useFetcher } from "../hooks/fetcher";
+import { Loading } from "../../components/Loading";
+import { useFetcher } from "../../hooks/fetcher";
 
 export const AdminPanel = () => {
   const { data: products, loading } = useFetcher("/products");
