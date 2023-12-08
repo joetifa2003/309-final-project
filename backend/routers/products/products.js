@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllProducts } = require("../../db/products");
+const { getAllProducts, createProduct } = require("../../db/products");
 const { authenticatedAdmin } = require("../auth/auth");
 const { uploadHandler } = require("../upload/upload");
 
