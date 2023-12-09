@@ -3,6 +3,7 @@ import { useCallback, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import CartIcon from "../assets/cart.svg";
 import { UserContext } from "../context/user";
+import { getApiUrl } from "../lib/getApiUrl";
 
 function NavBar() {
   const { user, setToken, setUser } = useContext(UserContext);
@@ -25,8 +26,14 @@ function NavBar() {
         </div>
         <div className="hidden items-center space-x-6 md:flex">
           <Link to="/user/cart">
-            <img className="h-8 w-8 cursor-pointer" src={CartIcon} />
+            <img className="h-full w-full cursor-pointer" src={CartIcon} />
           </Link>
+          {user && (
+            <img
+              src={`${getApiUrl()}/upload/${user.imgUrl}`}
+              className="h-8 rounded-full"
+            />
+          )}
           {!user ? (
             <>
               <Link to={"/signup"} className="btn btn-small">
@@ -86,6 +93,14 @@ function NavBar() {
                 </div>
               ) : (
                 <div className="flex flex-col space-y-4">
+                  {user && (
+                    <div className="flex justify-center">
+                      <img
+                        src={`${getApiUrl()}/upload/${user.imgUrl}`}
+                        className="h-16 rounded-full"
+                      />
+                    </div>
+                  )}
                   <Link
                     to="/user/cart"
                     className="btn btn-small bg-white"

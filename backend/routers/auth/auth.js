@@ -57,7 +57,12 @@ const authenticatedAdmin = async (req, res, next) => {
 
 const createUserToken = (user) =>
   jwt.sign(
-    { email: user.email, id: user.id, isAdmin: user.isAdmin },
+    {
+      email: user.email,
+      id: user.id,
+      isAdmin: user.isAdmin,
+      imgUrl: user.imgUrl,
+    },
     JWT_SECERT,
     {
       expiresIn: "10h",

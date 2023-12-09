@@ -9,7 +9,6 @@ async function createUser(email, name, password, img) {
   });
 }
 
-
 async function getUserByEmail(email) {
   return await User.findOne({ email });
 }
