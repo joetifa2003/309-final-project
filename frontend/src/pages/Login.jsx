@@ -1,5 +1,6 @@
 import { useCallback, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { UserContext } from "../context/user";
 import api from "../lib/axios";
 
@@ -23,7 +24,10 @@ function Login() {
       setToken(token);
       nav("/");
     } catch (e) {
-      alert("invalid email or password");
+      Swal.fire({
+        title: "Invalid email or password",
+        icon: "error",
+      });
     }
   }, []);
 

@@ -1,5 +1,6 @@
 import { useCallback, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { UserContext } from "../context/user";
 import api from "../lib/axios";
 
@@ -13,7 +14,10 @@ function SignUp() {
     const formData = new FormData(event.target);
 
     if (formData.get("password") != formData.get("confirmPassword")) {
-      alert("passwords do not match");
+      Swal.fire({
+        title: "Passwords does not match",
+        icon: "error",
+      });
       return;
     }
 
@@ -24,7 +28,10 @@ function SignUp() {
       setToken(token);
       nav("/");
     } catch (e) {
-      alert("an account already exists with that email");
+      Swal.fire({
+        title: "An account already exists with that email",
+        icon: "error",
+      });
     }
   }, []);
 
