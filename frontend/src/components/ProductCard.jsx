@@ -79,7 +79,7 @@ export const ProductCard = ({
 
   return (
     <div
-      className="group relative flex w-full cursor-pointer flex-col space-y-8 border-4 border-accent bg-white p-8"
+      className="group relative flex w-full cursor-pointer flex-col  border-4 border-accent bg-white p-8"
       onClick={() => nav(`/product/${p["_id"]}`)}
     >
       {user && (
@@ -114,9 +114,9 @@ export const ProductCard = ({
       )}
       <img
         src={`${getApiUrl()}/upload/${p.imgUrl}`}
-        className="h-[400px] object-contain"
+        className=" object-contain"
       />
-      <div className="flex flex-col space-y-4">
+      <div className="mt-auto flex flex-col space-y-4 pt-8">
         <div className="text-2xl font-bold">{p.name}</div>
         <div>Price: {p.price} L.E</div>
       </div>
