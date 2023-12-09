@@ -13,10 +13,17 @@ function MainLayout() {
     const t = token || localStorage.getItem("token");
     if (t) {
       api.defaults.headers["Authorization"] = `Bearer ${t}`;
-      api.get("/auth/me").then((res) => {
-        setUser(res.data);
-        setUserLoaded(true);
-      });
+      api
+        .get("/auth/me")
+        .then((res) => {
+          setUser(res.data);
+          setUserLoaded(true);
+        })
+        .catch(() => {
+          setToken(null);
+          setUser(null);
+          localStorage.removeItem("token");
+        });
     }
   }, [token]);
 
